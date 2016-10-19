@@ -41,7 +41,6 @@ class Cells extends GraphicalElement {
                       .data(data, key)
                       .enter()
                       .append("rect");
-    //this.updateVis(["x", "y", "width", "height", "fill"]);
   }
 
   updateVis(attrs) {
@@ -60,17 +59,17 @@ class Cells extends GraphicalElement {
 //==============================================================================
 
 class Labels extends GraphicalElement {
-  constructor(svg, id, names, margin, offset, angled, fontSize, orientation) {
+  constructor(svg, id, className, names, margin, offset, angled, fontSize, orientation) {
     super(svg, id);
     this.names = names;
     this.margin = margin;
     this.offset = offset;
     this.angled = angled;
-    this.factor = this.angled ? 0.75 : 1; // squish factor
     this.fontSize = fontSize;
+    this.factor = this.angled ? 0.75 : 1; // squish factor
     this.scale = d3.scalePoint();
     this.updateNames(this.names);
-    this.group.attr("class", "axis").style("font-size", this.fontSize);
+    this.group.attr("class", className).style("font-size", this.fontSize);
     switch(orientation) {
       case "top":     this.axis = d3.axisTop(this.scale);     break;
       case "left":    this.axis = d3.axisLeft(this.scale);    break;

@@ -3,7 +3,12 @@
   fill: orange;
 }*/
 
-svg {
+.barchart {
+  border: solid 1px;
+  font-size: 10px;
+}
+
+.barchartSVG {
   shape-rendering: crispEdges;
 }
 
