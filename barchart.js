@@ -70,6 +70,8 @@ function barchart(id, height, data) {
   anchorsSetup(w, h);
   scalesSetup(w, h);
   positionAllElements();
+  svg.append("g").attr("class", "axis").attr("id", "labels").append("path").attr("class", "domain")
+    .attr("stroke", "#000").attr("d", "M " + barLabels.anchor[0] + " " + barLabels.anchor[1] + " L " + barLabels.anchor[0] + " " + h);
 
   // custom initialization + transition
   bars.selection.attr("x", xScale(0))
@@ -85,7 +87,7 @@ function barchart(id, height, data) {
                 .attr("fill", bars.attrs.fill)
 
   function marginsSetup(w, h) {
-    xLabelsMargin = barLabels.getBox().width;
+    xLabelsMargin = Math.ceil(barLabels.getBox().width);
     yLabelsMargin = 10;
     xBarsMargin = w - xLabelsMargin - axisOffset;
     yBarsMargin = h - yLabelsMargin - axisOffset;
