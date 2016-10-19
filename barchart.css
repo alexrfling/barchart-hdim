@@ -15,35 +15,29 @@
   shape-rendering: crispEdges;
 }
 
-.xaxis .tick {
+.axis .tick {
   stroke: lightgrey;
-  opacity: 0.7;
+  stroke-width: 2px;
 }
 
-.xaxis text {
-  stroke: black;
-}
-
-.xaxis path {
-  stroke-width: 0;
-}
-
-.xaxis line {
+.axis line {
   stroke: lightgrey;
-  opacity: 0.7;
 }
 
-.yaxis .tick {
-  stroke-width: 0;
+.axis text {
+  stroke: gray;
+  stroke-width: 0.5px;
+}
+
+#xticks path {
+  stroke-width: 0px;
+}
+
+#labels path {
+  stroke-width: 1px;
+}
+
+#labels .domain {
   stroke: lightgrey;
-  opacity: 0.7;
-}
-
-.yaxis path {
-  stroke-width: 0;
-}
-
-.yaxis line {
-  stroke: lightgrey;
-  opacity: 0.7;
+  stroke-width: 2px;
 }

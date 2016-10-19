@@ -7,7 +7,7 @@ var data = [
     value: -0.011
   }, {
     key: "LYSC_at",
-    value: -0.049
+    value: -0.368
   }, {
     key: "RPLL_at",
     value: -0.007
@@ -31,10 +31,10 @@ var data = [
     value: 0.195
   }, {
     key: "YBFI_at",
-    value: 0.000
+    value: -0.099 // 0.000
   }, {
     key: "YCGO_at",
-    value: 0.000
+    value: 0.348 // 0.000
   }, {
     key: "YCKE_at",
     value: 0.132
