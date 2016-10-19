@@ -1,5 +1,111 @@
+function barchart(id, height, data) {
+  var container = new SVGContainer(id, "barchart", "barchartSVG",
+                                  function() { console.log("resized"); },
+                                  { top: 3, bottom: 3, left: 3, right: 3 }, height);
+
+  // important parameters
+  var w = container.svgWidth, h = container.svgHeight, padding = 30, datamax = 128;
+  var svg = container.svg;
+  container.resize();
+
+  // scales for bar width/height and x/y axes
+  var barWidthScale = d3.scaleBand()
+  											.domain(d3.range(data.length))
+                        .range([padding, h - padding], 0.05);
+  var barHeightScale = d3.scaleLinear()
+  												.domain([0, datamax])
+                          .range([0, (w / 2) - padding], 0.0);
+  var xScale = d3.scaleLinear()
+  								.domain([-1 * datamax, datamax])
+                	.range([padding, w - padding]);
+  var yScale = d3.scaleLinear()
+  								.domain([0, data.length])
+                	.range([padding, h - padding]);
+
+  // axes for rows/columns (note that these ARE NOT yet added to the svg)
+  var xAxis = d3.axisTop(xScale);
+  var yAxis = d3.axisLeft(yScale);
+
+  // add the axes to the svg (add these before the bars so the bars will be on top)
+  svg.append("g")
+  		.attr("class", "xaxis")
+      .attr("transform", "translate(" + 0 + "," + padding + ")")
+      .call(xAxis
+      		.tickSize(-1 * (h - 2 * padding), 0, 0)//.tickFormat("")
+          );
+  svg.append("g")
+  		.attr("class", "yaxis")
+      .attr("transform", "translate(" + padding + "," + 0 + ")")
+      .call(yAxis
+      		.tickSize(-1 * (w - 2 * padding), 0, 0)//.tickFormat("")
+          );
+
+  // create the clipPath
+  /*svg.append("clipPath")
+  		.attr("id", "visible-area")
+      .append("rect")
+      .attr("x", padding)
+      .attr("y", padding)
+      .attr("width", w - 2 * padding)
+      .attr("height", h - 2 * padding);
+
+  // add the clipPath to the svg
+  svg.append("g")
+  		.attr("id", "rectangles")
+      .attr("clip-path", "url(#visible-area)");*/
+
+  // the initial bars
+  var bars = svg//.select("#rectangles")
+  							.selectAll("rect")
+  							.data(data)
+      					.enter()
+      					.append("rect")
+                .classed("bar", true)
+                .attr("x", xScale(0)) // transition later for neg bars
+                .attr("y", barPositionY)
+                .attr("height", barWidth)
+                .attr("width", 0) // transition later
+                .attr("fill", "rgb(0,0,0)"); // transition later
+                //.on("mouseover", function() { highlightBar(this); })
+                //.on("mouseout", function() { unhighlightBar(this); })
+
+  // initial fade in/growth of the bars
+  svg.selectAll("rect.bar")
+  		.transition()
+      .duration(1000)
+      .attr("x", barPositionX)
+      .attr("width", barHeight)
+      .attr("fill", barColor);
+
+  function barPositionX(d, i) {
+  		if (d < 0) {
+      		return xScale(0) - barHeightScale(Math.abs(d));
+      } else {
+      		return xScale(0);
+      }
+  }
+
+  function barPositionY(d, i) {
+  		return yScale(i); // d.index instead of i???
+  }
+
+  function barHeight(d, i) {
+  		return barHeightScale(Math.abs(d));
+  }
+
+  function barWidth(d, i) {
+  		return barWidthScale.bandwidth();
+  }
+
+  function barColor(d, i) {
+  		return "rgb(0,0," + (2 * Math.abs(d)) + ")";
+  }
+}
+
+
+
 // important parameters
-var w = 700, h = 450, padding = 30, dataLength = 20, ascending = true,
+/*var w = 700, h = 450, padding = 30, dataLength = 20, ascending = true,
 		DATAMAX = 256, dataset = generateRandomVector(dataLength, DATAMAX),
     datamax = d3.max(dataset, function(d) { return Math.abs(d.value); });
 
@@ -289,4 +395,4 @@ function barColor(d, i) {
 
 function key(d, i) {
 		return d.key;
-}
+}*/

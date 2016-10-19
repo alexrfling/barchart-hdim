@@ -3,9 +3,20 @@
 <head>
 	<link rel="stylesheet" type="text/css" href="barchart.css">
 	<script src="d3/d3.min.js"></script>
+  <script src="d3-helpers/functions.js"></script>
+  <script src="d3-helpers/html-elements.js"></script>
+  <script src="d3-helpers/smalls.js"></script>
+  <script src="d3-helpers/svg-elements.js"></script>
+  <script src="d3-helpers/tools.js"></script>
 </head>
 <body>
     <!-- <p id="boundsViewer"></p> -->
-    <script src="barchart.js"></script>
+    <!-- <script src="barchart.js"></script> -->
+  <div id="parent"></div>
+  <script src="example-data.js"></script>
+  <script src="barchart.js"></script>
+  <script>
+    barchart("parent", 600, data);
+  </script>
 </body>
 </html>
