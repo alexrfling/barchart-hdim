@@ -61,10 +61,17 @@ function barchart(id, height, data) {
     function(d) { return colorScale(d.value); });
   var barLabels = new Labels(svg, "labels", "axis", labels, function() { return yBarsMargin; },
                             barHeightScale.step, false, 10, "left");
+  var tooltip = new Tooltip(container.div, "Regression Coefficient", [{ text: "Variable", id: "key" }, { text: "Value", id: "value" }], identity);
 
   barLabels.group.selectAll("text").attr("id", function() { return this.innerHTML; });
-  bars.addListener("mouseover", function(d) { barLabels.group.select("#" + d.key).classed("bold", true); });
-  bars.addListener("mouseout", function(d) { barLabels.group.select("#" + d.key).classed("bold", false); });
+  bars.addListener("mouseover", function(d) {
+    barLabels.group.select("#" + d.key).classed("bold", true);
+    tooltip.show(d, this);
+  });
+  bars.addListener("mouseout", function(d) {
+    barLabels.group.select("#" + d.key).classed("bold", false);
+    tooltip.hide();
+  });
 
   marginsSetup(w, h);
   anchorsSetup(w, h);
@@ -91,7 +98,6 @@ function barchart(id, height, data) {
     yLabelsMargin = 10;
     xBarsMargin = w - xLabelsMargin - axisOffset;
     yBarsMargin = h - yLabelsMargin - axisOffset;
-
   }
 
   function anchorsSetup(w, h) {
