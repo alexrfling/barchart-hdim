@@ -1,11 +1,14 @@
-/*rect.bar:hover {
-  transition: all 0.15s;
-  fill: orange;
-}*/
-
 .barchart {
   border: solid 1px;
   font-size: 10px;
+}
+
+.barchart rect:hover { /* bars */
+  filter: url("#shadow");
+}
+
+.bold {
+  font-weight: bold;
 }
 
 .barchartSVG {

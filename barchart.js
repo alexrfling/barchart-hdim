@@ -1,6 +1,21 @@
 function barchart(id, height, data) {
   var container = new SVGContainer(id, "barchart", "barchartSVG", resizeCallback,
                                   { top: 5, bottom: 5, left: 5, right: 5 }, height);
+
+  var filter = container.SVG.append("filter")
+                  .attr("id", "shadow")
+                  .attr("x", -2)
+                  .attr("y", -2)
+                  .attr("width", 200)
+                  .attr("height", 200);
+  filter.append("feGaussianBlur")
+        .attr("in", "SourceAlpha")
+        .attr("stdDeviation", 4);
+  filter.append("feOffset").attr("dx", 0).attr("dy", 0);
+  var filterMerge = filter.append("feMerge");
+  filterMerge.append("feMergeNode");
+  filterMerge.append("feMergeNode").attr("in", "SourceGraphic");
+
   var labels = data.map(key);
   var axisOffset = 5;
   var w = container.svgWidth, h = container.svgHeight, datamax = Math.max(...data.map(function(d) { return Math.abs(d.value); }));
@@ -16,9 +31,11 @@ function barchart(id, height, data) {
 
   // scales for bar width/height and x/y axes
   var barHeightScale = d3.scaleBand().domain(labels)
-                                     .range([0, yBarsMargin], 0.05);
+                                     .range([0, yBarsMargin])
+                                     .paddingInner(0.1)
+                                     .paddingOuter(0.05);
   var barWidthScale = d3.scaleLinear().domain([0, datamax])
-                                      .range([0, xBarsMargin / 2], 0.0);
+                                      .range([0, xBarsMargin / 2]);
   var xScale = d3.scaleLinear().domain([-1 * datamax, datamax])
                 	             .range([0, xBarsMargin]);
   var yScale = d3.scaleBand().domain(labels)
@@ -45,6 +62,9 @@ function barchart(id, height, data) {
   var barLabels = new Labels(svg, "labels", "yaxis", labels, function() { return yBarsMargin; },
                             bars.attrs.height, false, 10, "left");
   //var ticks = new Labels(svg, )
+  barLabels.group.selectAll("text").attr("id", function() { return this.innerHTML; });
+  bars.addListener("mouseover", function(d) { barLabels.group.select("#" + d.key).classed("bold", true); });
+  bars.addListener("mouseout", function(d) { barLabels.group.select("#" + d.key).classed("bold", false); });
 
   marginsSetup(w);
   anchorsSetup(w);
