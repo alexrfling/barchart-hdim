@@ -89,6 +89,7 @@ function barchart(id, height, data) {
     yLabelsMargin = 10;
     xBarsMargin = w - xLabelsMargin - axisOffset;
     yBarsMargin = h - yLabelsMargin - axisOffset;
+
   }
 
   function anchorsSetup(w, h) {
@@ -119,9 +120,9 @@ function barchart(id, height, data) {
 
   function resizeCallback() {
     var updatedWidth = container.resize();
-    marginsSetup(updatedWidth);
-    anchorsSetup(updatedWidth);
-    scalesSetup(updatedWidth);
+    marginsSetup(updatedWidth, h);
+    anchorsSetup(updatedWidth, h);
+    scalesSetup(updatedWidth, h);
     positionAllElements();
     updateVisAllElements();
   }
