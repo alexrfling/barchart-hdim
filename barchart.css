@@ -42,6 +42,10 @@
 	font-weight: bold;
 }
 
+.hidden {
+  display: none;
+}
+
 .barchart rect:hover { /* bars */
   filter: url("#shadow");
 }
