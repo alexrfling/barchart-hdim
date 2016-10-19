@@ -32,7 +32,7 @@ class Cells extends GraphicalElement {
       height: height,
       fill: fill
     };
-    updateData(data, key);
+    this.updateData(data, key);
   }
 
   updateData(data, key) {
@@ -41,7 +41,7 @@ class Cells extends GraphicalElement {
                       .data(data, key)
                       .enter()
                       .append("rect");
-    this.updateVis(["x", "y", "width", "height", "fill"]);
+    //this.updateVis(["x", "y", "width", "height", "fill"]);
   }
 
   updateVis(attrs) {
@@ -67,9 +67,10 @@ class Labels extends GraphicalElement {
     this.offset = offset;
     this.angled = angled;
     this.factor = this.angled ? 0.75 : 1; // squish factor
+    this.fontSize = fontSize;
     this.scale = d3.scalePoint();
     this.updateNames(this.names);
-    this.group.attr("class", "axis").style("font-size", fontSize);
+    this.group.attr("class", "axis").style("font-size", this.fontSize);
     switch(orientation) {
       case "top":     this.axis = d3.axisTop(this.scale);     break;
       case "left":    this.axis = d3.axisLeft(this.scale);    break;
@@ -81,7 +82,7 @@ class Labels extends GraphicalElement {
 
   updateNames(names) {
     this.names = names;
-    this.scale.domain(sample(this.names, Math.floor(this.factor * this.margin() / fontSize)))
+    this.scale.domain(sample(this.names, Math.floor(this.factor * this.margin() / this.fontSize)))
               .range([this.offset() / 2, this.margin() - this.offset() / 2]);
   }
 
