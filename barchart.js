@@ -62,16 +62,17 @@ function barchart(id, height, data) {
     function(d) { return colorScale(d.value); });
   var barLabels = new Labels(svg, "labels", "axis", labels, function() { return yBarsMargin; },
                             barHeightScale.step, false, 10, "left");
-  var tooltip = new Tooltip(container.div, "Regression Coefficient", [{ text: "Variable", id: "key" }, { text: "Value", id: "value" }], identity);
+  var posTooltip = new Tooltip(container.div, "Regression Coefficient", [{ text: "Variable", id: "key" }, { text: "Value", id: "value" }], identity);
+  var negTooltip = new Tooltip(container.div, "Regression Coefficient", [{ text: "Variable", id: "key" }, { text: "Value", id: "value" }], identity);
 
   barLabels.group.selectAll("text").attr("id", function() { return this.innerHTML; });
   bars.addListener("mouseover", function(d) {
     barLabels.group.select("#" + d.key).classed("bold", true);
-    tooltip.show(d, this, "left"/*d.value < 0 ? "left" : "right"*/);
+    d.value < 0 ? negTooltip.show(d, this, "left") : posTooltip.show(d, this, "right");
   });
   bars.addListener("mouseout", function(d) {
     barLabels.group.select("#" + d.key).classed("bold", false);
-    tooltip.hide();
+    d.value < 0 ? negTooltip.hide() : posTooltip.hide();
   });
   bars.addListener("click", sortBars);
 
