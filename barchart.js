@@ -55,7 +55,7 @@ function barchart(id, height, data) {
       .call(xAxis.tickSize(-1 * yBarsMargin - axisOffset, 0, 0) /*.tickFormat("") */ );
 
   var bars = new Cells(svg, "bars", data, key,
-    function(d) { return xScale(0) - (d.value < 0 ? barWidthScale(Math.abs(d.value)) : 0); },
+    function(d) { return xScale(0) - (d.value < 0 ? barWidthScale(Math.abs(d.value)) : -1); }, // -1 for pos bars -> no overlap on "0" center tick
     function(d) { return yScale(d.key); },
     function(d) { return barWidthScale(Math.abs(d.value)); },
     function(d) { return barHeightScale.bandwidth(); },
@@ -155,7 +155,7 @@ function barchart(id, height, data) {
     yScale.domain(labels);
     bars.selection.transition()
         .duration(1000)
-        .delay(function(d, i) { return i * 25; })
+        .delay(function(d) { return 500 * Math.abs(d.value) / datamax; })
         .attr("y", bars.attrs.y);
     barLabels.updateNames(labels);
     barLabels.updateVis(1000);

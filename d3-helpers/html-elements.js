@@ -56,7 +56,7 @@ class Tooltip {
   show(d, rect, side) {
     var box = rect.getBoundingClientRect(),
         anchor = side === "right" ?
-                 [window.innerWidth - box.left - window.pageXOffset,
+                 [window.innerWidth - box.left - window.pageXOffset + 1, // + 1 looks prettier in testing
                   box.top + box.height + window.pageYOffset] :
                  [box.left + box.width + window.pageXOffset,
                   box.top + box.height + window.pageYOffset];
