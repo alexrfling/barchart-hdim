@@ -77,10 +77,11 @@
 }
 
 #labels path {
-  stroke-width: 1px;
+  stroke: lightgrey;
+  stroke-width: 2px;
 }
 
 #labels .domain {
   stroke: lightgrey;
-  stroke-width: 2px;
+  stroke-width: 0px;
 }

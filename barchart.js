@@ -1,7 +1,8 @@
 function barchart(id, height, data) {
   var container = new SVGContainer(id, "barchart", "barchartSVG", resizeCallback,
                                   { top: 5, bottom: 5, left: 5, right: 5 }, height);
-
+  var byName = true;
+  var descending = true;
   var filter = container.SVG.append("filter")
                   .attr("id", "shadow")
                   .attr("x", -2)
@@ -66,18 +67,19 @@ function barchart(id, height, data) {
   barLabels.group.selectAll("text").attr("id", function() { return this.innerHTML; });
   bars.addListener("mouseover", function(d) {
     barLabels.group.select("#" + d.key).classed("bold", true);
-    tooltip.show(d, this);
+    tooltip.show(d, this, "left"/*d.value < 0 ? "left" : "right"*/);
   });
   bars.addListener("mouseout", function(d) {
     barLabels.group.select("#" + d.key).classed("bold", false);
     tooltip.hide();
   });
+  bars.addListener("click", sortBars);
 
   marginsSetup(w, h);
   anchorsSetup(w, h);
   scalesSetup(w, h);
   positionAllElements();
-  svg.append("g").attr("class", "axis").attr("id", "labels").append("path").attr("class", "domain")
+  svg.append("g").attr("class", "axis").attr("id", "labels").append("path")//.attr("class", "domain")
     .attr("stroke", "#000").attr("d", "M " + barLabels.anchor[0] + " " + barLabels.anchor[1] + " L " + barLabels.anchor[0] + " " + h);
 
   // custom initialization + transition
@@ -133,5 +135,26 @@ function barchart(id, height, data) {
     scalesSetup(updatedWidth, h);
     positionAllElements();
     updateVisAllElements();
+  }
+
+  function sortBars() {
+    byName = !byName;
+    if (byName) descending = !descending;
+    data = data.sort(function(a, b) {
+      if (byName) {
+        return descending ? a.key.localeCompare(b.key) : b.key.localeCompare(a.key);
+      } else {
+        return descending ? a.value - b.value : b.value - a.value;
+      }
+    });
+    labels = data.map(key);
+    barHeightScale.domain(labels);
+    yScale.domain(labels);
+    bars.selection.transition()
+        .duration(1000)
+        .delay(function(d, i) { return i * 25; })
+        .attr("y", bars.attrs.y);
+    barLabels.updateNames(labels);
+    barLabels.updateVis(1000);
   }
 }
