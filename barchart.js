@@ -139,6 +139,8 @@ function barchart(id, height, data) {
   }
 
   function sortBars() {
+    negTooltip.hide();
+    posTooltip.hide();
     byName = !byName;
     if (byName) descending = !descending;
     data = data.sort(function(a, b) {
