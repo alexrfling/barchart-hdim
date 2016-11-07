@@ -73,8 +73,8 @@ function barchart(id, height, data) {
                       return d.value < 0 ? [0, 10] : [0, -10];
                     })
                     .html(function(d) {
-                      return "<table><tr><td><strong>Key</strong></td><td>" + d.key + "</td></tr>"
-                              + "<tr><td><strong>Value</strong></td><td>" + d.value + "</td></tr></table>";
+                      return "<table><tr><td style='color:#0099c6'>Variable</td><td>" + d.key + "</td></tr>"
+                              + "<tr><td style='color:#0099c6'>Coefficient</td><td>" + d.value + "</td></tr></table>";
                     });
   container.svg.call(tip);
 
