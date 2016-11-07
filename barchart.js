@@ -62,17 +62,30 @@ function barchart(id, height, data) {
     function(d) { return colorScale(d.value); });
   var barLabels = new Labels(svg, "labels", "axis", labels, function() { return yBarsMargin; },
                             barHeightScale.step, false, 10, "left");
-  var posTooltip = new Tooltip(container.div, "Regression Coefficient", [{ text: "Variable", id: "key" }, { text: "Value", id: "value" }], identity);
-  var negTooltip = new Tooltip(container.div, "Regression Coefficient", [{ text: "Variable", id: "key" }, { text: "Value", id: "value" }], identity);
+
+  var tip = d3.tip().attr("class", "d3-tip")
+                    .style("font-family", "sans-serif")
+                    .style("font-size", "12px")
+                    .direction(function(d) {
+                      return d.value < 0 ? 'e' : 'w';
+                    })
+                    .offset(function(d) {
+                      return d.value < 0 ? [0, 10] : [0, -10];
+                    })
+                    .html(function(d) {
+                      return "<table><tr><td><strong>Key</strong></td><td>" + d.key + "</td></tr>"
+                              + "<tr><td><strong>Value</strong></td><td>" + d.value + "</td></tr></table>";
+                    });
+  container.svg.call(tip);
 
   barLabels.group.selectAll("text").attr("id", function() { return this.innerHTML; });
   bars.addListener("mouseover", function(d) {
     barLabels.group.select("#" + d.key).classed("bold", true);
-    d.value < 0 ? negTooltip.show(d, this, "left") : posTooltip.show(d, this, "right");
+    tip.show(d);
   });
   bars.addListener("mouseout", function(d) {
     barLabels.group.select("#" + d.key).classed("bold", false);
-    d.value < 0 ? negTooltip.hide() : posTooltip.hide();
+    tip.hide();
   });
   bars.addListener("click", sortBars);
 
@@ -139,8 +152,7 @@ function barchart(id, height, data) {
   }
 
   function sortBars() {
-    negTooltip.hide();
-    posTooltip.hide();
+    tip.hide();
     byName = !byName;
     if (byName) descending = !descending;
     data = data.sort(function(a, b) {
