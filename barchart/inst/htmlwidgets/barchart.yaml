@@ -1,0 +1,16 @@
+dependencies:
+  - name: barchart
+    version: 1.0.0
+    src: htmlwidgets/lib/barchart-hdim
+    script:
+      - d3/d3.min.js
+      - d3-helpers/functions.js
+      - d3-helpers/html-elements.js
+      - d3-helpers/smalls.js
+      - d3-helpers/svg-elements.js
+      - d3-helpers/tools.js
+      - barchart.js
+      - d3-tip/index.js
+    stylesheet:
+      - barchart.css
+      - d3-tip/examples/example-styles.css
