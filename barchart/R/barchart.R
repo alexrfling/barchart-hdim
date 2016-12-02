@@ -14,7 +14,8 @@ barchart <- function(vector, width = NULL, height = NULL) {
 
   # read the vector
   data <- vector[,1]
-  data <- cbind(rownames(vector), data)
+  nonzero <- which(data != 0)
+  data <- cbind(rownames(vector)[nonzero], data[nonzero])
   data <- data.frame(data)
   colnames(data) = c("key", "value")
 
