@@ -7,8 +7,8 @@ function addDropShadowFilter(svg, id) {
                   .attr("id", id)
                   .attr("x", -2)
                   .attr("y", -2)
-                  .attr("width", 200)
-                  .attr("height", 200);
+                  .attr("width", 10)
+                  .attr("height", 10);
   filter.append("feGaussianBlur")
         .attr("in", "SourceAlpha")
         .attr("stdDeviation", 4);
