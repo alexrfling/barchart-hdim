@@ -53,14 +53,11 @@ class Tooltip {
     rows.append("td").append("p").attr("id", function(d) { return d.id; });
   }
 
-  show(d, rect, side) {
+  show(d, rect) {
     var box = rect.getBoundingClientRect(),
-        anchor = side === "right" ?
-                 [window.innerWidth - box.left - window.pageXOffset + 1, // + 1 looks prettier in testing
-                  box.top + box.height + window.pageYOffset] :
-                 [box.left + box.width + window.pageXOffset,
+        anchor = [box.left + box.width + window.pageXOffset,
                   box.top + box.height + window.pageYOffset];
-    this.group.style(side, anchor[0] + "px")
+    this.group.style("left", anchor[0] + "px")
               .style("top", anchor[1] + "px")
               .classed("hidden", false);
     var keys = Object.keys(this.accessor(d));
