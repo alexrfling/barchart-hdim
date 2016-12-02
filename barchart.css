@@ -7,43 +7,11 @@
   font-family: sans-serif;
 }
 
-.tooltip { /* divs for all hover-over pop-ups */
-  position: absolute;
-  max-width: 500px;
-  height: auto;
-  background-color: white;
-  padding: 5px;
-  -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-  -moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-  pointer-events: none;
-  /*-webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;*/ /* uncomment to add rounded corners */
+.d3-tip td:nth-child(1) {
+  text-align: right;
 }
-
-.tooltip p { /* all text inside tooltips */
-  margin: 0;
-  font-size: 14px;
-}
-
-.tooltip td:nth-child(1) p { /* the row names in the tooltips' tables */
-	font-weight: bold;
-	text-align: right;
-  word-break: keep-all; /* prevents words from being broken up */
-}
-
-.tooltip td:nth-child(2) { /* values in each row */
-	padding-left: 5px;
-  word-break: break-all; /* breaks up words if they are too long */
-}
-
-.tooltip > p { /* title(s) of the tooltip(s) */
-	font-weight: bold;
-}
-
-.hidden {
-  display: none;
+.d3-tip td:nth-child(2) {
+  padding-left: 5px;
 }
 
 .barchart rect:hover { /* bars */
