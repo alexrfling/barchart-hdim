@@ -1,6 +1,10 @@
 function barchart(id, height, data) {
+  var myNode = document.getElementById(id);
+  while (myNode.firstChild) {
+      myNode.removeChild(myNode.firstChild);
+  }
   var container = new SVGContainer(id, "barchart", "barchartSVG", resizeCallback,
-                                  { top: 5, bottom: 5, left: 5, right: 5 }, height);
+                                  { top: 10, bottom: 10, left: 10, right: 10 }, height);
   var byName = true;
   var descending = true;
   addDropShadowFilter(container.SVG, "shadow");
@@ -40,10 +44,11 @@ function barchart(id, height, data) {
   var xLabels = svg.append("g")
   		.attr("class", "axis").attr("id", "xticks")
       .attr("transform", "translate(" + xLabelsMargin + "," + yLabelsMargin + ")")
-      .call(xAxis.tickSize(-1 * yBarsMargin - axisOffset, 0, 0) /*.tickFormat("") */ );
+      .call(xAxis.tickSize(-1 * yBarsMargin - axisOffset, 0, 0));
 
   var bars = new Cells(svg, "bars", data, key,
-    function(d) { return xScale(0) - (d.value < 0 ? barWidthScale(Math.abs(d.value)) : -1); }, // -1 for pos bars -> no overlap on "0" center tick
+    // -1 for pos bars -> no overlap on "0" center tick
+    function(d) { return xScale(0) - (d.value < 0 ? barWidthScale(Math.abs(d.value)) : -1); },
     function(d) { return yScale(d.key); },
     function(d) { return barWidthScale(Math.abs(d.value)); },
     function(d) { return barHeightScale.bandwidth(); },
@@ -61,18 +66,18 @@ function barchart(id, height, data) {
                       return d.value < 0 ? [0, 10] : [0, -10];
                     })
                     .html(function(d) {
-                      return "<table><tr><td style='color:#0099c6'>Variable</td><td>" + d.key + "</td></tr>"
-                              + "<tr><td style='color:#0099c6'>Coefficient</td><td>" + d.value + "</td></tr></table>";
+                      return "<table><tr><td style='color:#0099c6;padding-bottom:5px'>Variable</td><td style='padding-bottom:5px'>" + d.key + "</td></tr>"
+                              + "<tr><td style='color:#0099c6'>Coefficient</td><td>" + round(d.value, 7) + "</td></tr></table>";
                     });
   container.svg.call(tip);
 
-  barLabels.group.selectAll("text").attr("id", function() { return this.innerHTML; });
+  barLabels.group.selectAll("text").attr("id", function() { return parensToUnders(dotsToUnders(this.innerHTML)); });
   bars.addListener("mouseover", function(d) {
-    barLabels.group.select("#" + d.key).classed("bold", true);
+    barLabels.group.select("#" + parensToUnders(dotsToUnders(d.key))).classed("bold", true);
     tip.show(d);
   });
   bars.addListener("mouseout", function(d) {
-    barLabels.group.select("#" + d.key).classed("bold", false);
+    barLabels.group.select("#" + parensToUnders(dotsToUnders(d.key))).classed("bold", false);
     tip.hide();
   });
   bars.addListener("click", sortBars);
@@ -159,5 +164,9 @@ function barchart(id, height, data) {
         .attr("y", bars.attrs.y);
     barLabels.updateNames(labels);
     barLabels.updateVis(1000);
+  }
+
+  function round(number, decimals) {
+    return Number(Math.round(number + 'e' + decimals) + 'e-' + decimals);
   }
 }
