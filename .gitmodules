@@ -1,0 +1,3 @@
+[submodule "barchart/inst/htmlwidgets/lib/barchart"]
+	path = barchart/inst/htmlwidgets/lib/barchart
+	url = https://github.com/alexrfling/barchart.git
