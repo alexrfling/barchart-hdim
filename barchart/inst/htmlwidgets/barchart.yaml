@@ -7,6 +7,7 @@ dependencies:
       - d3-helpers/functions.js
       - d3-helpers/html-elements.js
       - d3-helpers/smalls.js
+      - d3-helpers/svg-effects.js
       - d3-helpers/svg-elements.js
       - d3-helpers/tools.js
       - barchart.js
