@@ -1,2 +1,2 @@
-# barplot
-Interactive barplot with d3.js
+# barchart-hdim
+Interactive bar chart for R/Shiny.
