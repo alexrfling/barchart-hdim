@@ -10,7 +10,7 @@
 #   Build and Reload Package:  'Cmd + Shift + B'
 #   Check Package:             'Cmd + Shift + E'
 #   Test Package:              'Cmd + Shift + T'
-barchart <- function(vector, width = NULL, height = NULL) {
+barchart <- function(vector, width = NULL, height = NULL, negColor = "#dc3912", posColor = "#109618") {
 
   # read the vector
   data <- vector[,1]
@@ -21,7 +21,9 @@ barchart <- function(vector, width = NULL, height = NULL) {
 
   # create a list that contains the settings
   settings <- list(
-    id = "barchart"
+    id = "barchart",
+    negColor = negColor,
+    posColor = posColor
   )
 
   # pass the data and settings using 'x'

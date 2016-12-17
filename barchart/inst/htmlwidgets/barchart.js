@@ -30,7 +30,7 @@ HTMLWidgets.widget({
         //   }
         // );
         var data = HTMLWidgets.dataframeToD3(x.data);
-        barchart(el.id, height, data);
+        barchart(el.id, height, data, x.settings.negColor, x.settings.posColor);
       },
 
       resize: function(width, height) {
