@@ -12,13 +12,27 @@ HTMLWidgets.widget({
 
         return {
             renderValue: function (x) {
-                if (x.data && !chart.data) {
+                var negColor = x.settings.negColor;
+                var posColor = x.settings.posColor;
+                var byName = (x.settings.byName === 'TRUE' ? true : false);
+                var descending = (x.settings.descending === 'TRUE' ? true : false);
+
+                if (!chart.data) {
                     var data = HTMLWidgets.dataframeToD3(x.data);
-                    chart.initializeVis(data, x.settings.negColor, x.settings.posColor);
-                } else if (x.settings.negColor !== chart.negColor || x.settings.posColor !== chart.posColor) {
-                    chart.updateColors(x.settings.negColor, x.settings.posColor);
+
+                    chart.initializeVis(data, negColor, posColor, byName, descending);
+
+                } else if (negColor !== chart.negColor || posColor !== chart.posColor) {
+
+                    chart.updateColors(negColor, posColor);
+
+                } else if (byName !== chart.byName || descending !== chart.descending) {
+
+                    chart.updateSort(byName, descending);
+
                 } else {
                     var data = HTMLWidgets.dataframeToD3(x.data);
+
                     chart.updateData(data);
                 }
             },
