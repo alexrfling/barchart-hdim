@@ -10,10 +10,10 @@
 #   Build and Reload Package:  'Cmd + Shift + B'
 #   Check Package:             'Cmd + Shift + E'
 #   Test Package:              'Cmd + Shift + T'
-barchart <- function (vector, width = NULL, height = NULL, negColor = '#dc3912', posColor = '#109618', byName = TRUE, descending = TRUE) {
+barchart <- function (vector, width = NULL, height = NULL, negColor = '#dc3912', posColor = '#109618', byName = TRUE, ascending = TRUE) {
 
     # read the vector
-    data <- vector[,1]
+    data <- vector[, 1]
     nonzero <- which(data != 0)
     data <- cbind(rownames(vector)[nonzero], data[nonzero])
     data <- data.frame(data)
@@ -25,7 +25,7 @@ barchart <- function (vector, width = NULL, height = NULL, negColor = '#dc3912',
         negColor = negColor,
         posColor = posColor,
         byName = byName,
-        descending = descending
+        ascending = ascending
     )
 
     # pass the data and settings using 'x'

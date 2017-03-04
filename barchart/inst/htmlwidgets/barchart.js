@@ -15,20 +15,26 @@ HTMLWidgets.widget({
                 var negColor = x.settings.negColor;
                 var posColor = x.settings.posColor;
                 var byName = (x.settings.byName === 'TRUE' ? true : false);
-                var descending = (x.settings.descending === 'TRUE' ? true : false);
+                var ascending = (x.settings.ascending === 'TRUE' ? true : false);
 
                 if (!chart.data) {
                     var data = HTMLWidgets.dataframeToD3(x.data);
+                    var options = {
+                        negColor: negColor,
+                        posColor: posColor,
+                        byName: byName,
+                        ascending: ascending
+                    };
 
-                    chart.initializeVis(data, negColor, posColor, byName, descending);
+                    chart.initializeVis(data, options);
 
                 } else if (negColor !== chart.negColor || posColor !== chart.posColor) {
 
                     chart.updateColors(negColor, posColor);
 
-                } else if (byName !== chart.byName || descending !== chart.descending) {
+                } else if (byName !== chart.byName || ascending !== chart.ascending) {
 
-                    chart.updateSort(byName, descending);
+                    chart.updateSort(byName, ascending);
 
                 } else {
                     var data = HTMLWidgets.dataframeToD3(x.data);
