@@ -44,7 +44,8 @@ HTMLWidgets.widget({
             },
 
             resize: function (width, height) {
-                // Barchart handles its own resizing (except for height...)
+                // Barchart automatically resizes width
+                chart.resize(height);
             }
         };
     }
