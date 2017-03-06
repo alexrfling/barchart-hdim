@@ -12,10 +12,10 @@ HTMLWidgets.widget({
 
         return {
             renderValue: function (x) {
-                var negColor = x.settings.negColor;
-                var posColor = x.settings.posColor;
-                var byName = (x.settings.byName === 'TRUE' ? true : false);
-                var ascending = (x.settings.ascending === 'TRUE' ? true : false);
+                var negColor = x.options.negColor;
+                var posColor = x.options.posColor;
+                var byName = (x.options.byName === 'TRUE' ? true : false);
+                var ascending = (x.options.ascending === 'TRUE' ? true : false);
 
                 if (!chart.data) {
                     var data = HTMLWidgets.dataframeToD3(x.data);

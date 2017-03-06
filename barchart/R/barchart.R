@@ -12,15 +12,14 @@
 #   Test Package:              'Cmd + Shift + T'
 barchart <- function (vector, width = NULL, height = NULL, negColor = '#dc3912', posColor = '#109618', byName = TRUE, ascending = TRUE) {
 
-    # read the vector
+    # read the nonzero elements of the vector into a data frame
     data <- vector[, 1]
     nonzero <- which(data != 0)
     data <- cbind(rownames(vector)[nonzero], data[nonzero])
     data <- data.frame(data)
-    colnames(data) = c('key', 'value')
+    colnames(data) <- c('key', 'value')
 
-    # create a list that contains the settings
-    settings <- list(
+    options <- list(
         id = 'barchart',
         negColor = negColor,
         posColor = posColor,
@@ -28,13 +27,12 @@ barchart <- function (vector, width = NULL, height = NULL, negColor = '#dc3912',
         ascending = ascending
     )
 
-    # pass the data and settings using 'x'
+    # pass the data and options using 'x'
     x <- list(
         data = data,
-        settings = settings
+        options = options
     )
 
-    # create the widget
     htmlwidgets::createWidget('barchart', x, width = width, height = height)
 }
 
