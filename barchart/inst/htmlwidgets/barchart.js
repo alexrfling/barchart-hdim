@@ -8,7 +8,7 @@ HTMLWidgets.widget({
 
     factory: function (el, width, height) {
 
-        var chart = new Barchart(el.id, height);
+        var chart = new Barchart(el.id);
 
         return {
             renderValue: function (x) {
@@ -20,6 +20,7 @@ HTMLWidgets.widget({
                 if (!chart.data) {
                     var data = HTMLWidgets.dataframeToD3(x.data);
                     var options = {
+                        height: height,
                         negColor: negColor,
                         posColor: posColor,
                         byName: byName,

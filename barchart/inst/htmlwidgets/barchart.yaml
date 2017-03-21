@@ -8,7 +8,6 @@ dependencies:
       - d3-helpers/addDropShadowFilter.js
       - d3-helpers/graphicalElement.js
       - d3-helpers/cells.js
-      - d3-helpers/flushContents.js
       - d3-helpers/htmlEscape.js
       - d3-helpers/identity.js
       - d3-helpers/interpolateColors.js
@@ -17,6 +16,7 @@ dependencies:
       - d3-helpers/round.js
       - d3-helpers/sample.js
       - d3-helpers/svgContainer.js
+      - d3-helpers/widget.js
       - barchart.js
     stylesheet:
       - d3-helpers/d3-tip/examples/example-styles.css
