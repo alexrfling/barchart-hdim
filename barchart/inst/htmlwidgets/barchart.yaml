@@ -19,4 +19,4 @@ dependencies:
       - barchart.js
     stylesheet:
       - d3-helpers/d3-tip/examples/example-styles.css
-      - barchart.css
+      - d3-helpers/widget.css
