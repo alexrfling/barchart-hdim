@@ -1,2 +1,2 @@
 # barchart-hdim
-Interactive bar chart for R/Shiny.
+Interactive bar chart for R/Shiny
