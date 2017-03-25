@@ -56,7 +56,25 @@ ui <- fluidPage(
                              'ascending' = TRUE,
                              'descending' = FALSE
                          ),
-                         selected = TRUE)
+                         selected = TRUE),
+
+            hr(), #-------------------------------------------------------------
+
+            checkboxInput(inputId = 'filterZeros',
+                          label = 'Filter zeros',
+                          value = TRUE),
+
+            hr(), #-------------------------------------------------------------
+
+            checkboxInput(inputId = 'noTransition',
+                          label = 'Skip transition',
+                          value = FALSE),
+
+            hr(), #-------------------------------------------------------------
+
+            checkboxInput(inputId = 'hardReload',
+                          label = 'Hard reload',
+                          value = FALSE)
         )
     ),
 
@@ -67,19 +85,30 @@ ui <- fluidPage(
     )
 )
 
+getData <- function (length) {
+    data <- rnorm(length)
+    data <- data.frame(data)
+    rownames(data) <- sapply(1:length, function (j) { return(paste('Var', j)) })
+
+    return(data)
+}
+
 server <- function (input, output) {
+
+    data <- reactive({
+        getData(input$length)
+    })
 
     output$chart <- renderBarchart({
 
-        data <- rnorm(input$length)
-        df <- data.frame(data)
-        rownames(df) <- sapply(1:input$length, function (i) { return(paste('Var', i)) })
-
-        barchart(df,
+        barchart(data(),
+            filterZeros = input$filterZeros,
             negColor = input$negColor,
             posColor = input$posColor,
             byName = input$byName,
-            ascending = input$ascending)
+            ascending = input$ascending,
+            noTransition = input$noTransition,
+            hardReload = input$hardReload)
     })
 }
 

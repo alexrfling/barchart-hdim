@@ -10,21 +10,37 @@
 #   Build and Reload Package:  'Cmd + Shift + B'
 #   Check Package:             'Cmd + Shift + E'
 #   Test Package:              'Cmd + Shift + T'
-barchart <- function (vector, width = NULL, height = NULL, negColor = '#dc3912', posColor = '#109618', byName = TRUE, ascending = TRUE) {
+barchart <- function (vector,
+                      width = NULL,
+                      height = NULL,
+                      filterZeros = TRUE,
+                      negColor = '#dc3912',
+                      posColor = '#109618',
+                      byName = TRUE,
+                      ascending = TRUE,
+                      noTransition = FALSE,
+                      hardReload = FALSE) {
 
-    # read the nonzero elements of the vector into a data frame
+    # convert the vector (a data frame) into a friendlier format
     data <- vector[, 1]
-    nonzero <- which(data != 0)
-    data <- cbind(rownames(vector)[nonzero], data[nonzero])
+
+    if (filterZeros) {
+        nonzeros <- which(data != 0)
+        data <- cbind(rownames(vector)[nonzeros], data[nonzeros])
+    } else {
+        data <- cbind(rownames(vector), data)
+    }
+
     data <- data.frame(data)
     colnames(data) <- c('key', 'value')
 
     options <- list(
-        id = 'barchart',
         negColor = negColor,
         posColor = posColor,
         byName = byName,
-        ascending = ascending
+        ascending = ascending,
+        noTransition = noTransition,
+        hardReload = hardReload
     )
 
     # pass the data and options using 'x'

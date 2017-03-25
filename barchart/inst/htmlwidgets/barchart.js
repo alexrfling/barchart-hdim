@@ -16,18 +16,21 @@ HTMLWidgets.widget({
                 var posColor = x.options.posColor;
                 var byName = (x.options.byName === 'TRUE' ? true : false);
                 var ascending = (x.options.ascending === 'TRUE' ? true : false);
+                var noTransition = x.options.noTransition;
+                var hardReload = x.options.hardReload;
 
-                if (!chart.data) {
+                if (!chart.data || hardReload) {
                     var data = HTMLWidgets.dataframeToD3(x.data);
                     var options = {
                         height: height,
                         negColor: negColor,
                         posColor: posColor,
                         byName: byName,
-                        ascending: ascending
+                        ascending: ascending,
+                        noTransition: noTransition
                     };
 
-                    chart.initializeVis(data, options);
+                    chart.initialize(data, options);
 
                 } else if (negColor !== chart.negColor || posColor !== chart.posColor) {
 
