@@ -88,7 +88,10 @@ ui <- fluidPage(
 getData <- function (length) {
     data <- rnorm(length)
     data <- data.frame(data)
-    rownames(data) <- sapply(1:length, function (j) { return(paste('Var', j)) })
+
+    if (length > 0) {
+        rownames(data) <- sapply(1:length, function (j) { return(paste('Var', j)) })
+    }
 
     return(data)
 }
