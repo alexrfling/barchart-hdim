@@ -10,14 +10,19 @@ HTMLWidgets.widget({
 
         var chart = new Barchart(el.id);
 
+        // booleans converted from R may be true, false, 'TRUE', or 'FALSE'
+        function getBool (bool) {
+            return (bool === true || bool === 'TRUE');
+        }
+
         return {
             renderValue: function (x) {
                 var negColor = x.options.negColor;
                 var posColor = x.options.posColor;
-                var byName = (x.options.byName === 'TRUE' ? true : false);
-                var ascending = (x.options.ascending === 'TRUE' ? true : false);
-                var noTransition = x.options.noTransition;
-                var hardReload = x.options.hardReload;
+                var byName = getBool(x.options.byName);
+                var ascending = getBool(x.options.ascending);
+                var noTransition = getBool(x.options.noTransition);
+                var hardReload = getBool(x.options.hardReload);
 
                 if (!chart.data || hardReload) {
                     var data = HTMLWidgets.dataframeToD3(x.data);
