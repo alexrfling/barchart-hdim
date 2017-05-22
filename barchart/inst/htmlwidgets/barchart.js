@@ -27,6 +27,7 @@ HTMLWidgets.widget({
                 if (!chart.data || hardReload) {
                     var data = HTMLWidgets.dataframeToD3(x.data);
                     var options = {
+                        width: width,
                         height: height,
                         negColor: negColor,
                         posColor: posColor,
@@ -53,8 +54,7 @@ HTMLWidgets.widget({
             },
 
             resize: function (width, height) {
-                // Barchart automatically resizes width
-                chart.resize(height);
+                chart.resize(width, height);
             }
         };
     }
