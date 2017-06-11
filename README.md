@@ -27,11 +27,11 @@ Renders an interactive bar chart widget of _data_ with the following optional pa
   * _height_ - the height of the widget (default: `NULL`)
   * _negColor_ - the color of bars with negative `value` fields (default: `'#dc3912'`)
   * _posColor_ - the color of bars with positive `value` fields (default: `'#109618'`)
-  * _byName_ - if true, determines bar ordering by comparing their `key` fields; otherwise, their `value` fields are compared (default: `TRUE`)
-  * _ascending_ - if true, sorts the bars ascending; otherwise, they are sorted descending (default: `TRUE`)
-  * _noTransition_ - if true, renders the bar chart with no initial transition; otherwise, renders the bar chart with an initial transition (default: `FALSE`)
-  * _filterZeros_ - if true, filters out elements whose value is `0` from the bar chart; otherwise, all elements are included in the bar chart (default: `TRUE`)
-  * _hardReload_ - if true, completely re-renders the bar chart; otherwise, smoothly transitions the bar chart (default: `FALSE`)
+  * _byName_ - if `TRUE`, determines bar ordering by comparing their `key` fields; otherwise, their `value` fields are compared (default: `TRUE`)
+  * _ascending_ - if `TRUE`, sorts the bars ascending; otherwise, they are sorted descending (default: `TRUE`)
+  * _noTransition_ - if `TRUE`, renders the bar chart with no initial transition; otherwise, renders the bar chart with an initial transition (default: `FALSE`)
+  * _filterZeros_ - if `TRUE`, filters out elements whose value is `0` from the bar chart; otherwise, all elements are included in the bar chart (default: `TRUE`)
+  * _hardReload_ - if `TRUE`, completely re-renders the widget; otherwise, smoothly transitions the widget (default: `FALSE`)
 
 <a name='barchartOutput' href='#barchartOutput'>#</a> __barchartOutput__(_outputId_, _width_ = '100%', _height_ = '400px')
 
