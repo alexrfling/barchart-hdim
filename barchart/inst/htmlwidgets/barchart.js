@@ -8,7 +8,7 @@ HTMLWidgets.widget({
 
     factory: function (el, width, height) {
 
-        var chart = new Barchart(el.id);
+        var chart = new d3.Barchart(el.id);
 
         // booleans converted from R may be true, false, 'TRUE', or 'FALSE'
         function getBool (bool) {
