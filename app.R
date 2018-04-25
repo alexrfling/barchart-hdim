@@ -66,9 +66,9 @@ ui <- fluidPage(
 
             hr(), #-------------------------------------------------------------
 
-            checkboxInput(inputId = 'noTransition',
-                          label = 'Skip transition',
-                          value = FALSE),
+            checkboxInput(inputId = 'enableTransitions',
+                          label = 'Enable transitions',
+                          value = TRUE),
 
             hr(), #-------------------------------------------------------------
 
@@ -110,7 +110,7 @@ server <- function (input, output) {
             posColor = input$posColor,
             byName = input$byName,
             ascending = input$ascending,
-            noTransition = input$noTransition,
+            enableTransitions = input$enableTransitions,
             hardReload = input$hardReload)
     })
 }

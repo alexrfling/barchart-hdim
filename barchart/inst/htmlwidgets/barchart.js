@@ -21,7 +21,7 @@ HTMLWidgets.widget({
                 var posColor = x.options.posColor;
                 var byName = getBool(x.options.byName);
                 var ascending = getBool(x.options.ascending);
-                var noTransition = getBool(x.options.noTransition);
+                var enableTransitions = getBool(x.options.enableTransitions);
                 var hardReload = getBool(x.options.hardReload);
 
                 if (!chart.data || hardReload) {
@@ -33,7 +33,7 @@ HTMLWidgets.widget({
                         posColor: posColor,
                         byName: byName,
                         ascending: ascending,
-                        noTransition: noTransition
+                        enableTransitions: enableTransitions
                     };
 
                     chart.initialize(data, options);

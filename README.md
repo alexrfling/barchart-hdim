@@ -20,7 +20,7 @@ library(barchart)
 
 ## Usage
 
-<a name='barchart' href='#barchart'>#</a> __barchart__(_data_, _width_, _height_, _negColor_, _posColor_, _byName_, _ascending_, _noTransition_, _filterZeros_, _hardReload_)
+<a name='barchart' href='#barchart'>#</a> __barchart__(_data_, _width_, _height_, _negColor_, _posColor_, _byName_, _ascending_, _enableTransitions_, _filterZeros_, _hardReload_)
 
 Renders an interactive bar chart widget of _data_ with the following optional parameters:
   * _width_ - the width of the widget (default: `NULL`)
@@ -29,7 +29,7 @@ Renders an interactive bar chart widget of _data_ with the following optional pa
   * _posColor_ - the color of bars with positive `value` fields (default: `'#109618'`)
   * _byName_ - if `TRUE`, determines bar ordering by comparing their `key` fields; otherwise, their `value` fields are compared (default: `TRUE`)
   * _ascending_ - if `TRUE`, sorts the bars ascending; otherwise, they are sorted descending (default: `TRUE`)
-  * _noTransition_ - if `TRUE`, renders the bar chart with no initial transition; otherwise, renders the bar chart with an initial transition (default: `FALSE`)
+  * _enableTransitions_ - if `TRUE`, the widget will render/update with transitions; otherwise, the widget will render/update without transitions (default: `TRUE`)
   * _filterZeros_ - if `TRUE`, filters out elements whose value is `0` from the bar chart; otherwise, all elements are included in the bar chart (default: `TRUE`)
   * _hardReload_ - if `TRUE`, completely re-renders the widget; otherwise, smoothly transitions the widget (default: `FALSE`)
 

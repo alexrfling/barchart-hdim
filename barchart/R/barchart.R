@@ -18,7 +18,7 @@ barchart <- function (vector,
                       posColor = '#109618',
                       byName = TRUE,
                       ascending = TRUE,
-                      noTransition = FALSE,
+                      enableTransitions = TRUE,
                       hardReload = FALSE) {
 
     # convert the vector (a data frame) into a friendlier format
@@ -39,7 +39,7 @@ barchart <- function (vector,
         posColor = posColor,
         byName = byName,
         ascending = ascending,
-        noTransition = noTransition,
+        enableTransitions = enableTransitions,
         hardReload = hardReload
     )
 
